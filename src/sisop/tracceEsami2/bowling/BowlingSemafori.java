@@ -40,6 +40,7 @@ public class BowlingSemafori extends Bowling
         giocatoreInfo.put(corrente, info);
         giocatoreIndice.put(corrente, contatoreGiocatoriArrivati);
         giocatorePunteggio.put(corrente, 0);
+        System.out.println("Scarpe richieste " + info);
         contatoreGiocatoriArrivati++;
         if(contatoreGiocatoriArrivati == NUMERO_GIOCATORI)
             possoPreparare.release();
@@ -69,6 +70,7 @@ public class BowlingSemafori extends Bowling
         {
             possoTirare[indice].acquire();
             int punti = random.nextInt(0, 11);
+            System.out.println(corrente.getName().subSequence(0, corrente.getName().length()-3) + " ha segnato " + punti + " punti!!");
             mutex.acquire();
             numeroTiri[indice]++;
             giocatorePunteggio.put(corrente, giocatorePunteggio.get(corrente) + punti);
@@ -100,6 +102,6 @@ public class BowlingSemafori extends Bowling
             }
 
         }
-        System.out.println("Tutte le scarpe consegnate. Il vincitore di oggi : "+ vincitore.getName() +". Bowling Il Semaforo chiude!");
+        System.out.println("Tutte le scarpe consegnate. Il vincitore di oggi : "+ vincitore.getName() + ": " + puntiMax + ". Bowling Il Semaforo chiude!");
     }
 }
